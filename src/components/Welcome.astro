@@ -1,0 +1,371 @@
+---
+/**
+ * Welcome Component - Framer-style parallax intro
+ * Three-column layout with animated floating images on sides
+ * Images animate in on scroll using Intersection Observer
+ */
+---
+
+<section id="welcome" class="welcome-section bg-background">
+  <!-- Left Floating Images (Desktop only) -->
+  <div class="floating-images floating-images-left">
+    <div class="floating-image floating-image-1">
+      <img
+        src="/images/about1.avif"
+        alt="Barcelona luxury property"
+        class="w-full h-auto"
+        loading="lazy"
+      />
+    </div>
+    <div class="spacer-large"></div>
+    <div class="floating-image floating-image-2">
+      <img
+        src="/images/about2.avif"
+        alt="Mediterranean lifestyle"
+        class="w-full h-auto"
+        loading="lazy"
+      />
+    </div>
+  </div>
+
+  <!-- Center Content -->
+  <div class="welcome-content">
+    <!-- Logo -->
+    <div class="flex justify-center mb-8">
+      <img
+        src="/images/logo.svg"
+        alt="Marinela Bendz"
+        class="h-24 w-auto"
+      />
+    </div>
+
+    <!-- Welcome Text -->
+    <p class="welcome-label font-sans">
+      Welcome to Marinela Bendz, Property Hunter
+    </p>
+
+    <!-- Headline -->
+    <h2 class="welcome-headline">
+      Where Luxury Meets<br />the Ocean Breeze
+    </h2>
+
+    <!-- Tagline -->
+    <p class="welcome-tagline">
+      -Your trusted advisor for homes and assets.
+    </p>
+
+    <!-- Body Paragraphs -->
+    <div class="welcome-body">
+      <p>
+        As a property hunter in Barcelona, I specialise in finding the right property for my clients - whether for investment or as a home. My job is to research, shortlist, visit, and evaluate each property, so you can save time and energy to focus on other priorities.
+      </p>
+      <p>
+        Driven by my Scandinavian roots and work ethic, I take great pride in delivering a service built on excellence. My clients can expect high standards with attention to detail and accountability in every step of the collaboration.
+      </p>
+      <p>
+        Unlike traditional real estate agents, I work exclusively for the buyers: No conflict of interest, no seller-side commission. My service is contracted at a fixed rate regardless of the property price; ensuring my advice and recommendations are unbiased and always aligned with your best interests.
+      </p>
+    </div>
+
+    <!-- Warmest regards -->
+    <p class="welcome-regards">
+      Warmest regards,
+    </p>
+
+    <!-- Portrait -->
+    <div class="welcome-portrait">
+      <img
+        src="/images/marinela-portrait.png"
+        alt="Marinela Bendz"
+        class="w-40 h-40 object-cover rounded-sm mx-auto"
+      />
+    </div>
+
+    <!-- Signature -->
+    <div class="welcome-signature">
+      <img
+        src="/images/signature.avif"
+        alt="Marinela Bendz signature"
+        class="signature-img"
+      />
+    </div>
+
+    <!-- Name -->
+    <p class="welcome-name">Marinela Bendz</p>
+    <p class="welcome-title font-sans">Property Hunter</p>
+  </div>
+
+  <!-- Right Floating Images (Desktop only) -->
+  <div class="floating-images floating-images-right">
+    <div class="floating-image floating-image-3">
+      <img
+        src="/images/about3.avif"
+        alt="Barcelona architecture"
+        class="w-full h-auto"
+        loading="lazy"
+      />
+    </div>
+    <div class="spacer-medium"></div>
+    <div class="floating-image floating-image-4">
+      <img
+        src="/images/about4.avif"
+        alt="Luxury interior"
+        class="w-full h-auto"
+        loading="lazy"
+      />
+    </div>
+    <div class="spacer-large"></div>
+    <div class="floating-image floating-image-5">
+      <img
+        src="/images/about5.avif"
+        alt="Barcelona city view"
+        class="w-full h-auto"
+        loading="lazy"
+      />
+    </div>
+  </div>
+</section>
+
+<!-- Intersection Observer Script for Scroll Animations -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const floatingImages = document.querySelectorAll('.floating-image');
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -10% 0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, observerOptions);
+
+    floatingImages.forEach(img => {
+      observer.observe(img);
+    });
+  });
+</script>
+
+<style>
+  .bg-background {
+    background-color: var(--color-background);
+  }
+
+  .welcome-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 6rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Desktop: Three columns */
+  @media (min-width: 1280px) {
+    .welcome-section {
+      grid-template-columns: 1fr minmax(auto, 600px) 1fr;
+      gap: 4rem;
+      padding: 8rem 3rem;
+      min-height: auto;
+    }
+  }
+
+  /* Floating Images Containers */
+  .floating-images {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    padding-top: 2rem;
+  }
+
+  @media (min-width: 1280px) {
+    .floating-images {
+      display: flex;
+    }
+  }
+
+  .floating-images-left {
+    align-items: flex-end;
+    padding-right: 2rem;
+  }
+
+  .floating-images-right {
+    align-items: flex-start;
+    padding-left: 2rem;
+  }
+
+  /* Spacers for spreading images throughout section */
+  .spacer-medium {
+    height: 200px;
+  }
+
+  .spacer-large {
+    height: 400px;
+  }
+
+  /* Floating Image Items - Animated */
+  .floating-image {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .floating-image.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* All images displayed as tall/portrait - cropped to fit */
+  .floating-image-1 {
+    width: 280px;
+    height: 380px;
+    transition-delay: 0s;
+  }
+
+  .floating-image-2 {
+    width: 260px;
+    height: 340px;
+    transition-delay: 0.1s;
+  }
+
+  .floating-image-3 {
+    width: 240px;
+    height: 320px;
+    transition-delay: 0.05s;
+  }
+
+  .floating-image-4 {
+    width: 270px;
+    height: 360px;
+    transition-delay: 0.15s;
+  }
+
+  .floating-image-5 {
+    width: 250px;
+    height: 330px;
+    transition-delay: 0.2s;
+  }
+
+  .floating-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Center Content */
+  .welcome-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .welcome-content {
+      padding: 0 2rem;
+    }
+  }
+
+  .welcome-label {
+    font-size: 0.875rem;
+    letter-spacing: 0.08em;
+    color: var(--color-text);
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+  }
+
+  .welcome-headline {
+    font-family: var(--font-serif);
+    font-size: 2.25rem;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .welcome-headline {
+      font-size: 3rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .welcome-headline {
+      font-size: 3.5rem;
+    }
+  }
+
+  .welcome-tagline {
+    font-style: italic;
+    color: var(--color-text-muted);
+    margin-bottom: 3.5rem;
+    font-size: 1.125rem;
+  }
+
+  .welcome-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .welcome-body p {
+    color: var(--color-text);
+    line-height: 1.8;
+    font-size: 1rem;
+  }
+
+  .welcome-regards {
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+    font-style: italic;
+  }
+
+  .welcome-portrait {
+    margin-bottom: 1.5rem;
+  }
+
+  .welcome-signature {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .signature-img {
+    width: 150px;
+    height: auto;
+    opacity: 0.85;
+  }
+
+  .welcome-name {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--color-text);
+    margin-bottom: 0.25rem;
+  }
+
+  .welcome-title {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .floating-image {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>

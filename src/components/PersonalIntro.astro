@@ -1,0 +1,134 @@
+---
+/**
+ * PersonalIntro Component
+ * Two-column layout with Marinela's portrait and about text
+ * Mobile-first: stacks with text first on mobile
+ */
+
+interface Props {
+  subtitle?: string;
+  headline?: string;
+  tagline?: string;
+}
+
+const {
+  subtitle = "Welcome to Marinela Bendz, Property Hunter",
+  headline = "Where Luxury Meets the Ocean Breeze",
+  tagline = "Your trusted advisor for homes and assets."
+} = Astro.props;
+
+const paragraphs = [
+  "As a property hunter in Barcelona, I specialise in finding the right property for my clients — whether for investment or as a home. My job is to research, shortlist, visit, and evaluate each property, so you can save time and energy to focus on other priorities.",
+  "Driven by my Scandinavian roots and work ethic, I take great pride in delivering a service built on excellence. My clients can expect high standards with attention to detail and accountability in every step of the collaboration.",
+  "Unlike traditional real estate agents, I work exclusively for the buyers: No conflict of interest, no seller-side commission. My service is contracted at a fixed rate regardless of the property price; ensuring my advice and recommendations are unbiased and always aligned with your best interests."
+];
+---
+
+<section class="section-padding bg-background" id="about">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+      <!-- Left: Portrait Photo -->
+      <div class="order-2 lg:order-1 scroll-animate-left">
+        <div class="relative">
+          <!-- Decorative gold border accent -->
+          <div class="absolute -inset-4 border border-secondary/30 -z-10 hidden lg:block"></div>
+
+          <img
+            src="/images/marinela-portrait.png"
+            alt="Marinela Bendz - Luxury Property Hunter Barcelona"
+            class="w-full max-w-md mx-auto lg:max-w-none rounded-sm shadow-lg"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <!-- Right: Text Content -->
+      <div class="order-1 lg:order-2 text-center lg:text-left scroll-animate-right">
+        <!-- MB Logo -->
+        <img
+          src="/images/logo.svg"
+          alt="MB Monogram"
+          class="w-16 h-16 mx-auto lg:mx-0 mb-6"
+        />
+
+        <!-- Subtitle -->
+        <p class="text-secondary font-semibold uppercase tracking-widest text-sm mb-4">
+          {subtitle}
+        </p>
+
+        <!-- Headline -->
+        <h2 class="text-3xl md:text-4xl lg:text-5xl text-primary font-serif mb-6">
+          {headline}
+        </h2>
+
+        <!-- Tagline -->
+        <p class="text-lg text-text-muted italic font-script mb-8">
+          "{tagline}"
+        </p>
+
+        <!-- Body Paragraphs -->
+        <div class="space-y-6 text-text-muted leading-relaxed">
+          {paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+
+        <!-- Key Points Grid -->
+        <div class="grid sm:grid-cols-2 gap-6 mt-10 pt-8 border-t border-secondary/20 scroll-animate stagger-children">
+          <div>
+            <div class="flex items-center gap-3 mb-2">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span class="font-medium text-text">Buyer Exclusive</span>
+            </div>
+            <p class="text-sm text-text-muted">I never work for sellers — my loyalty is 100% with you.</p>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-3 mb-2">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span class="font-medium text-text">Fixed Fee</span>
+            </div>
+            <p class="text-sm text-text-muted">€11,000 regardless of property price — complete transparency.</p>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-3 mb-2">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span class="font-medium text-text">Local Expertise</span>
+            </div>
+            <p class="text-sm text-text-muted">Deep knowledge of Barcelona's neighbourhoods and market.</p>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-3 mb-2">
+              <svg class="w-5 h-5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+              </svg>
+              <span class="font-medium text-text">Full Service</span>
+            </div>
+            <p class="text-sm text-text-muted">From search to keys — I handle everything.</p>
+          </div>
+        </div>
+
+        <!-- Sign-off -->
+        <div class="mt-10 pt-8 border-t border-secondary/20">
+          <p class="text-text-muted italic mb-4">Warmest regards,</p>
+
+          <!-- Signature Block -->
+          <div class="flex flex-col items-center lg:items-start gap-2">
+            <span class="font-script text-2xl text-primary">Marinela Bendz</span>
+            <span class="text-sm text-secondary uppercase tracking-wider">Property Hunter</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

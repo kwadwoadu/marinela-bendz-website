@@ -1,0 +1,124 @@
+---
+interface Props {
+  transparent?: boolean;
+}
+
+const { transparent = true } = Astro.props;
+---
+
+<header
+  id="header"
+  class:list={[
+    "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+    transparent ? "bg-transparent" : "bg-primary shadow-md"
+  ]}
+>
+  <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="/" class="flex items-center group">
+      <img
+        src="/images/logo.svg"
+        alt="Marinela Bendz"
+        class="h-12 w-auto transition-transform duration-300 group-hover:scale-105"
+      />
+    </a>
+
+    <!-- Desktop Navigation -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#about" class="nav-link text-white/90 hover:text-secondary transition-colors text-sm tracking-wide">About</a>
+      <a href="#services" class="nav-link text-white/90 hover:text-secondary transition-colors text-sm tracking-wide">Services</a>
+      <a href="#faq" class="nav-link text-white/90 hover:text-secondary transition-colors text-sm tracking-wide">FAQ</a>
+      <a href="#contact" class="contact-btn bg-white text-primary px-5 py-2 text-sm tracking-wide transition-all hover:shadow-lg hover:-translate-y-0.5">
+        Contact
+      </a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button
+      id="mobile-menu-btn"
+      class="mobile-btn md:hidden text-white p-2"
+      aria-label="Toggle menu"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="md:hidden hidden bg-primary/95 backdrop-blur-sm border-t border-white/10"
+  >
+    <div class="px-6 py-4 flex flex-col gap-4">
+      <a href="#about" class="text-white/90 hover:text-secondary transition-colors py-2">About</a>
+      <a href="#services" class="text-white/90 hover:text-secondary transition-colors py-2">Services</a>
+      <a href="#faq" class="text-white/90 hover:text-secondary transition-colors py-2">FAQ</a>
+      <a href="#contact" class="btn-primary text-center mt-2">Contact</a>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  mobileMenuBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+
+  // Close mobile menu on link click
+  mobileMenu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+    });
+  });
+
+  // Header scroll effect
+  const header = document.getElementById('header');
+  let lastScroll = 0;
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll > 100) {
+      header?.classList.remove('bg-transparent');
+      header?.classList.add('bg-cream', 'shadow-md', 'header-scrolled');
+    } else {
+      header?.classList.add('bg-transparent');
+      header?.classList.remove('bg-cream', 'shadow-md', 'header-scrolled');
+    }
+
+    lastScroll = currentScroll;
+  });
+</script>
+
+<style>
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+  .bg-cream {
+    background-color: var(--color-background);
+  }
+  .text-secondary {
+    color: var(--color-secondary);
+  }
+  .hover\:text-secondary:hover {
+    color: var(--color-secondary);
+  }
+  /* Scrolled header text colors */
+  .header-scrolled .nav-link {
+    color: var(--color-text);
+  }
+  .header-scrolled .nav-link:hover {
+    color: var(--color-secondary);
+  }
+  .header-scrolled .contact-btn {
+    background-color: var(--color-primary);
+    color: white;
+  }
+  .header-scrolled .mobile-btn {
+    color: var(--color-text);
+  }
+</style>

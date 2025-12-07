@@ -1,0 +1,171 @@
+---
+/**
+ * Hero Component - v0.8.0
+ * Full viewport video hero with elegant script typography
+ * No overlay - clean video background
+ */
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  title = "Marinela Bendz",
+  subtitle = "Luxury Property Hunter · Barcelona"
+} = Astro.props;
+---
+
+<section class="relative h-screen flex flex-col overflow-hidden">
+  <!-- Video Background - No Overlay -->
+  <div class="absolute inset-0">
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      poster="/images/barcelona-overview.avif"
+      class="w-full h-full object-cover"
+    >
+      <source src="/videos/barcelona-overview.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+  <!-- Title and Subtitle - Centered Vertically -->
+  <div class="relative z-10 flex-1 flex items-center justify-center px-6">
+    <div class="text-center">
+      <h1 class="hero-script-title text-white mb-6 animate-fade-in-up">
+        {title}
+      </h1>
+      <p class="text-xl md:text-2xl text-white/90 animate-fade-in-up stagger-1 tracking-wide font-light hero-subtitle font-sans">
+        {subtitle}
+      </p>
+    </div>
+  </div>
+
+  <!-- CTA Buttons - Fixed at Bottom -->
+  <div class="relative z-10 hero-buttons-container">
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up stagger-2">
+      <a href="#services" class="btn-primary w-full sm:w-auto text-center">
+        Personal Residencies
+      </a>
+      <a href="#services" class="btn-glass w-full sm:w-auto text-center">
+        Investment Properties
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce scroll-indicator">
+    <svg class="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+    </svg>
+  </div>
+</section>
+
+<style>
+  /* Hero script title - elegant calligraphy font */
+  .hero-script-title {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 4rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+    text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  @media (min-width: 768px) {
+    .hero-script-title {
+      font-size: 6rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-script-title {
+      font-size: 8rem;
+    }
+  }
+
+  /* Subtitle with text shadow for readability */
+  .hero-subtitle {
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Fade in up animation */
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Stagger delays */
+  .stagger-1 {
+    animation-delay: 0.15s;
+  }
+
+  .stagger-2 {
+    animation-delay: 0.3s;
+  }
+
+  /* Solid white button - Investment Properties */
+  .btn-glass {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid white;
+    color: var(--color-primary);
+    padding: 0.875rem 2rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-glass:hover {
+    background: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.25);
+  }
+
+  /* Scroll indicator bounce */
+  .scroll-indicator {
+    animation: gentleBounce 2s ease-in-out infinite;
+  }
+
+  @keyframes gentleBounce {
+    0%, 100% { transform: translateY(0) translateX(-50%); }
+    50% { transform: translateY(10px) translateX(-50%); }
+  }
+
+  /* Hero buttons container - positioned at bottom */
+  .hero-buttons-container {
+    padding-bottom: 100px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .hero-buttons-container {
+      padding-bottom: 120px;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in-up,
+    .scroll-indicator {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>

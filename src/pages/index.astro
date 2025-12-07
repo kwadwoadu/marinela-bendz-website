@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Welcome from '../components/Welcome.astro';
+import Services from '../components/Services.astro';
+import FAQ from '../components/FAQ.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Marinela Bendz | Luxury Property Hunter Barcelona"
+  description="Your trusted advisor for luxury homes and investment properties in Barcelona. Exclusive buyer representation, fixed fee of €11,000, and complete market access."
+>
+  <Header />
+  <main>
+    <Hero />
+    <Welcome />
+    <Services />
+    <FAQ />
+    <Contact tallyFormId="YOUR_TALLY_FORM_ID" />
+  </main>
+  <Footer />
+</BaseLayout>

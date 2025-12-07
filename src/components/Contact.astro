@@ -1,0 +1,112 @@
+---
+interface Props {
+  headline?: string;
+  subheadline?: string;
+  tallyFormId?: string;
+}
+
+const {
+  headline = "Get In Touch",
+  subheadline = "Ready to find your dream property in Barcelona? Let's discuss your needs.",
+  tallyFormId = "YOUR_TALLY_FORM_ID"
+} = Astro.props;
+---
+
+<section id="contact" class="relative">
+  <!-- Background -->
+  <div class="absolute inset-0">
+    <img
+      src="/images/barcelona-vibe.avif"
+      alt="Barcelona cityscape"
+      class="w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-primary/90"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 section-padding">
+    <div class="max-w-4xl mx-auto">
+      <!-- Section Header -->
+      <div class="text-center mb-12 scroll-animate">
+        <div class="flex items-center justify-center gap-4 mb-6">
+          <div class="w-16 h-px bg-secondary/50"></div>
+          <span class="text-secondary text-sm tracking-widest uppercase">Contact</span>
+          <div class="w-16 h-px bg-secondary/50"></div>
+        </div>
+        <h2 class="text-3xl md:text-4xl text-white mb-4">
+          {headline}
+        </h2>
+        <p class="text-white/70 text-lg max-w-2xl mx-auto">
+          {subheadline}
+        </p>
+      </div>
+
+      <!-- Form Container -->
+      <div class="bg-white rounded-sm shadow-2xl p-8 md:p-12 scroll-animate-scale">
+        <!-- Tally.so Form Embed -->
+        <div class="tally-form-container">
+          <iframe
+            data-tally-src={`https://tally.so/embed/${tallyFormId}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}
+            loading="lazy"
+            width="100%"
+            height="400"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0"
+            title="Contact Form"
+          ></iframe>
+        </div>
+
+        <!-- Fallback / Placeholder if form not loaded -->
+        <noscript>
+          <div class="text-center py-8">
+            <p class="text-text-muted mb-4">Please enable JavaScript to use the contact form.</p>
+            <p class="text-text-muted">
+              Or email directly:
+              <a href="mailto:contact@marinelabendz.com" class="text-secondary hover:underline">
+                contact@marinelabendz.com
+              </a>
+            </p>
+          </div>
+        </noscript>
+      </div>
+
+      <!-- Alternative Contact -->
+      <div class="text-center mt-8">
+        <p class="text-white/60 text-sm">
+          Prefer email?
+          <a href="mailto:contact@marinelabendz.com" class="text-secondary hover:underline">
+            contact@marinelabendz.com
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tally.so Script -->
+<script src="https://tally.so/widgets/embed.js"></script>
+
+<style>
+  .bg-primary\/90 {
+    background-color: rgba(45, 74, 94, 0.9);
+  }
+  .bg-secondary\/50 {
+    background-color: rgba(196, 169, 106, 0.5);
+  }
+  .text-secondary {
+    color: var(--color-secondary);
+  }
+  .text-text-muted {
+    color: var(--color-text-muted);
+  }
+
+  .tally-form-container {
+    min-height: 400px;
+  }
+
+  .tally-form-container iframe {
+    width: 100%;
+    min-height: 400px;
+  }
+</style>

@@ -1,0 +1,122 @@
+---
+const faqs = [
+  {
+    question: "What is a Property Hunter?",
+    answer: "A Property Hunter (also known as a buyer's agent) works exclusively for you, the buyer. Unlike traditional real estate agents who work for sellers, I search the entire market to find properties that match your criteria, negotiate on your behalf, and guide you through the entire purchase process."
+  },
+  {
+    question: "How is your fee structured?",
+    answer: "I charge a fixed fee of €11,000 regardless of the property price. This ensures my advice is always in your best interest — I'm not incentivized to push you towards more expensive properties like commission-based agents might be."
+  },
+  {
+    question: "What areas of Barcelona do you cover?",
+    answer: "I cover all of Barcelona and surrounding areas including Sitges, Castelldefels, and the Costa Brava. Whether you're looking for a city apartment in Eixample, a villa in Pedralbes, or a beachfront property in Sitges, I can help."
+  },
+  {
+    question: "Can you help with investment properties?",
+    answer: "Absolutely. I help investors identify opportunities for both fix & flip and buy & hold strategies. My market analysis includes ROI projections, rental yield estimates, and neighbourhood growth potential."
+  },
+  {
+    question: "Do you help with the legal process?",
+    answer: "Yes, I coordinate all aspects of the purchase including connecting you with trusted lawyers, notaries, and other professionals. I handle the due diligence to ensure there are no surprises after purchase."
+  },
+  {
+    question: "What's the minimum property value you work with?",
+    answer: "I specialize in properties starting from €1,000,000. This allows me to provide the personalized, high-touch service that luxury property purchases require."
+  }
+];
+---
+
+<section id="faq" class="section-padding bg-background-alt">
+  <div class="max-w-3xl mx-auto">
+    <!-- Section Header -->
+    <div class="text-center mb-12 scroll-animate">
+      <div class="flex items-center justify-center gap-4 mb-6">
+        <div class="w-16 h-px bg-secondary/30"></div>
+        <span class="text-secondary text-sm tracking-widest uppercase">FAQ</span>
+        <div class="w-16 h-px bg-secondary/30"></div>
+      </div>
+      <h2 class="text-3xl md:text-4xl text-text">Frequently Asked Questions</h2>
+    </div>
+
+    <!-- FAQ Accordion -->
+    <div class="space-y-4 scroll-animate stagger-children">
+      {faqs.map((faq, index) => (
+        <div class="faq-item border border-gray-200 rounded-sm bg-white">
+          <button
+            class="faq-trigger w-full px-6 py-5 text-left flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span class="font-medium text-text">{faq.question}</span>
+            <svg class="faq-icon w-5 h-5 text-secondary flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-content hidden px-6 pb-5">
+            <p class="text-text-muted leading-relaxed">{faq.answer}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="text-center mt-12 scroll-animate">
+      <p class="text-text-muted mb-4">Still have questions?</p>
+      <a href="#contact" class="text-secondary hover:underline font-medium">
+        Get in touch →
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.faq-trigger').forEach(button => {
+    button.addEventListener('click', () => {
+      const item = button.parentElement;
+      const content = item?.querySelector('.faq-content');
+      const icon = button.querySelector('.faq-icon');
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      // Close all other items
+      document.querySelectorAll('.faq-item').forEach(otherItem => {
+        if (otherItem !== item) {
+          otherItem.querySelector('.faq-content')?.classList.add('hidden');
+          otherItem.querySelector('.faq-trigger')?.setAttribute('aria-expanded', 'false');
+          otherItem.querySelector('.faq-icon')?.classList.remove('rotate-180');
+        }
+      });
+
+      // Toggle current item
+      if (isExpanded) {
+        content?.classList.add('hidden');
+        button.setAttribute('aria-expanded', 'false');
+        icon?.classList.remove('rotate-180');
+      } else {
+        content?.classList.remove('hidden');
+        button.setAttribute('aria-expanded', 'true');
+        icon?.classList.add('rotate-180');
+      }
+    });
+  });
+</script>
+
+<style>
+  .bg-background-alt {
+    background-color: var(--color-background-alt);
+  }
+  .bg-secondary\/30 {
+    background-color: rgba(196, 169, 106, 0.3);
+  }
+  .text-secondary {
+    color: var(--color-secondary);
+  }
+  .text-text {
+    color: var(--color-text);
+  }
+  .text-text-muted {
+    color: var(--color-text-muted);
+  }
+  .rotate-180 {
+    transform: rotate(180deg);
+  }
+</style>

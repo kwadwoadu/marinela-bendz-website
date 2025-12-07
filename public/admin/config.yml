@@ -1,0 +1,88 @@
+backend:
+  name: github
+  repo: owner/marinela-bendz-website  # Replace with actual repo
+  branch: main
+
+# Local development
+local_backend: true
+
+media_folder: public/images
+public_folder: /images
+
+site_url: https://marinelabendz.com
+display_url: https://marinelabendz.com
+
+collections:
+  # Site Settings
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - label: "General Settings"
+        name: "general"
+        file: "src/content/settings.json"
+        fields:
+          - { label: "Site Title", name: "siteTitle", widget: "string", default: "Marinela Bendz" }
+          - { label: "Site Description", name: "siteDescription", widget: "text" }
+          - { label: "Contact Email", name: "contactEmail", widget: "string" }
+          - { label: "Tally Form ID", name: "tallyFormId", widget: "string" }
+
+  # Homepage Content
+  - name: "homepage"
+    label: "Homepage"
+    files:
+      - label: "Hero Section"
+        name: "hero"
+        file: "src/content/hero.json"
+        fields:
+          - { label: "Main Headline", name: "headline", widget: "string", default: "Where Luxury Meets the Ocean Breeze" }
+          - { label: "Subheadline", name: "subheadline", widget: "text", default: "Your trusted advisor for homes and assets in Barcelona" }
+          - { label: "Hero Image", name: "heroImage", widget: "image", required: false }
+
+      - label: "Introduction Section"
+        name: "introduction"
+        file: "src/content/introduction.json"
+        fields:
+          - { label: "Section Headline", name: "headline", widget: "string" }
+          - { label: "Body Text", name: "body", widget: "text" }
+
+      - label: "About Section"
+        name: "about"
+        file: "src/content/about.json"
+        fields:
+          - { label: "Headline", name: "headline", widget: "string" }
+          - label: "Body Paragraphs"
+            name: "bodyParagraphs"
+            widget: "list"
+            field: { label: "Paragraph", name: "paragraph", widget: "text" }
+          - { label: "Portrait Photo", name: "portrait", widget: "image" }
+          - { label: "Signature Image", name: "signature", widget: "image", required: false }
+
+  # Services
+  - name: "services"
+    label: "Services"
+    folder: "src/content/services"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Subtitle", name: "subtitle", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Price", name: "price", widget: "string", default: "€11,000" }
+      - { label: "Price Note", name: "priceNote", widget: "string", default: "Fixed fee regardless of property price" }
+      - { label: "Image", name: "image", widget: "image" }
+      - label: "Features"
+        name: "features"
+        widget: "list"
+        field: { label: "Feature", name: "feature", widget: "string" }
+      - { label: "Order", name: "order", widget: "number", default: 0 }
+
+  # FAQ
+  - name: "faq"
+    label: "FAQ"
+    folder: "src/content/faq"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Question", name: "question", widget: "string" }
+      - { label: "Answer", name: "answer", widget: "text" }
+      - { label: "Order", name: "order", widget: "number", default: 0 }

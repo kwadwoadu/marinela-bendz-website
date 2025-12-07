@@ -1,0 +1,71 @@
+---
+interface Props {
+  headline?: string;
+  body?: string;
+}
+
+const {
+  headline = "Meet Marinela Bendz",
+  body = "Property Hunter is an exclusive advisor on the buyer's side who will search for properties for you, curating a shortlist based on your needs and budget before taking you on viewings. I handle all the due diligence, submit offers on your behalf, and negotiate the best possible deal for you."
+} = Astro.props;
+---
+
+<section class="section-padding bg-background">
+  <div class="max-w-4xl mx-auto text-center">
+    <!-- Decorative element -->
+    <div class="flex items-center justify-center gap-4 mb-8">
+      <div class="w-16 h-px bg-secondary/30"></div>
+      <span class="text-secondary text-sm tracking-widest uppercase">Your Trusted Advisor</span>
+      <div class="w-16 h-px bg-secondary/30"></div>
+    </div>
+
+    <!-- Headline -->
+    <h2 class="text-3xl md:text-4xl text-text mb-8">
+      {headline}
+    </h2>
+
+    <!-- Body text -->
+    <p class="text-lg text-text-muted leading-relaxed mb-8">
+      {body}
+    </p>
+
+    <!-- Value proposition -->
+    <div class="flex flex-wrap justify-center gap-8 mt-12">
+      <div class="text-center">
+        <div class="text-3xl font-serif text-secondary mb-2">100%</div>
+        <div class="text-sm text-text-muted">Buyer Focused</div>
+      </div>
+      <div class="w-px bg-secondary/20 hidden sm:block"></div>
+      <div class="text-center">
+        <div class="text-3xl font-serif text-secondary mb-2">€11K</div>
+        <div class="text-sm text-text-muted">Fixed Fee</div>
+      </div>
+      <div class="w-px bg-secondary/20 hidden sm:block"></div>
+      <div class="text-center">
+        <div class="text-3xl font-serif text-secondary mb-2">€1M+</div>
+        <div class="text-sm text-text-muted">Properties</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bg-background {
+    background-color: var(--color-background);
+  }
+  .bg-secondary\/30 {
+    background-color: rgba(196, 169, 106, 0.3);
+  }
+  .bg-secondary\/20 {
+    background-color: rgba(196, 169, 106, 0.2);
+  }
+  .text-secondary {
+    color: var(--color-secondary);
+  }
+  .text-text {
+    color: var(--color-text);
+  }
+  .text-text-muted {
+    color: var(--color-text-muted);
+  }
+</style>
