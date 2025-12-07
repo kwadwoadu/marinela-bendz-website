@@ -1,0 +1,16 @@
+{
+  "title": "Investment Properties",
+  "subtitle": "Strategic Real Estate Investments",
+  "description": "Looking to invest in Barcelona's thriving real estate market? I'll help you identify and secure properties with the best ROI potential.",
+  "price": "€11,000",
+  "priceNote": "Fixed fee regardless of property price",
+  "image": "/images/InvestmentProperties.png",
+  "features": [
+    "Fix & Flip or Buy & Hold strategy guidance",
+    "Market analysis and property identification",
+    "Comprehensive due diligence and valuation",
+    "ROI-focused negotiation",
+    "Investment portfolio optimization"
+  ],
+  "order": 2
+}

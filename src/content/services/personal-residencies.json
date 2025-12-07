@@ -1,0 +1,16 @@
+{
+  "title": "Personal Residencies",
+  "subtitle": "Your Dream Home in Barcelona",
+  "description": "Whether you're seeking a second residence or planning a full relocation, I'll guide you through every step of finding your perfect home in Barcelona.",
+  "price": "€11,000",
+  "priceNote": "Fixed fee regardless of property price",
+  "image": "/images/PersonalResidencies.png",
+  "features": [
+    "Neighbourhood guidance and school recommendations",
+    "Curated property shortlists tailored to your needs",
+    "Property viewings and comprehensive due diligence",
+    "Offer submission and negotiation support",
+    "End-to-end relocation assistance"
+  ],
+  "order": 1
+}

@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: owner/marinela-bendz-website  # Replace with actual repo
+  repo: kwadwoadu/marinela-bendz-website
   branch: main
 
 # Local development
