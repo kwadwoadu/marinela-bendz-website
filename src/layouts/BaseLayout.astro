@@ -52,8 +52,7 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Pinyon+Script&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="/src/styles/global.css" />
+  <!-- Styles are imported via <style is:global> at bottom of this file -->
 </head>
 <body class="antialiased">
   <slot />
