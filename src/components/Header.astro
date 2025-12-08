@@ -6,6 +6,9 @@ interface Props {
 const { transparent = true } = Astro.props;
 ---
 
+<!-- Mobile Menu Backdrop -->
+<div id="menu-backdrop" class="menu-backdrop md:hidden"></div>
+
 <header
   id="header"
   class:list={[
@@ -33,51 +36,77 @@ const { transparent = true } = Astro.props;
       </a>
     </div>
 
-    <!-- Mobile Menu Button -->
+    <!-- Mobile Menu Button - Animated Hamburger -->
     <button
       id="mobile-menu-btn"
-      class="mobile-btn md:hidden text-white p-2"
+      class="hamburger md:hidden text-white"
       aria-label="Toggle menu"
+      aria-expanded="false"
     >
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
     </button>
   </nav>
-
-  <!-- Mobile Menu -->
-  <div
-    id="mobile-menu"
-    class="md:hidden hidden bg-primary/95 backdrop-blur-sm border-t border-white/10"
-  >
-    <div class="px-6 py-4 flex flex-col gap-4">
-      <a href="#about" class="text-white/90 hover:text-secondary transition-colors py-2">About</a>
-      <a href="#services" class="text-white/90 hover:text-secondary transition-colors py-2">Services</a>
-      <a href="#faq" class="text-white/90 hover:text-secondary transition-colors py-2">FAQ</a>
-      <a href="#contact" class="btn-primary text-center mt-2">Contact</a>
-    </div>
-  </div>
 </header>
 
-<script>
-  // Mobile menu toggle
-  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
+<!-- Slide-in Mobile Menu Panel -->
+<div
+  id="mobile-menu"
+  class="mobile-menu-panel md:hidden"
+>
+  <div class="flex flex-col gap-6">
+    <a href="#about" class="mobile-nav-link text-white/90 hover:text-secondary transition-colors text-lg py-2">About</a>
+    <a href="#services" class="mobile-nav-link text-white/90 hover:text-secondary transition-colors text-lg py-2">Services</a>
+    <a href="#faq" class="mobile-nav-link text-white/90 hover:text-secondary transition-colors text-lg py-2">FAQ</a>
+    <a href="#contact" class="btn-primary text-center mt-4">Contact</a>
+  </div>
+</div>
 
-  mobileMenuBtn?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('hidden');
+<script>
+  // Mobile menu elements
+  const hamburger = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const backdrop = document.getElementById('menu-backdrop');
+
+  function openMenu() {
+    hamburger?.classList.add('open');
+    hamburger?.setAttribute('aria-expanded', 'true');
+    menu?.classList.add('open');
+    backdrop?.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    hamburger?.classList.remove('open');
+    hamburger?.setAttribute('aria-expanded', 'false');
+    menu?.classList.remove('open');
+    backdrop?.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Toggle menu on hamburger click
+  hamburger?.addEventListener('click', () => {
+    menu?.classList.contains('open') ? closeMenu() : openMenu();
   });
 
-  // Close mobile menu on link click
-  mobileMenu?.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu?.classList.add('hidden');
-    });
+  // Close menu on backdrop click
+  backdrop?.addEventListener('click', closeMenu);
+
+  // Close menu on link click
+  menu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Close menu on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu?.classList.contains('open')) {
+      closeMenu();
+    }
   });
 
   // Header scroll effect
   const header = document.getElementById('header');
-  let lastScroll = 0;
 
   window.addEventListener('scroll', () => {
     const currentScroll = window.scrollY;
@@ -89,8 +118,6 @@ const { transparent = true } = Astro.props;
       header?.classList.add('bg-transparent');
       header?.classList.remove('bg-cream', 'shadow-md', 'header-scrolled');
     }
-
-    lastScroll = currentScroll;
   });
 </script>
 
@@ -107,6 +134,7 @@ const { transparent = true } = Astro.props;
   .hover\:text-secondary:hover {
     color: var(--color-secondary);
   }
+
   /* Scrolled header text colors */
   .header-scrolled .nav-link {
     color: var(--color-text);
@@ -118,7 +146,93 @@ const { transparent = true } = Astro.props;
     background-color: var(--color-primary);
     color: white;
   }
-  .header-scrolled .mobile-btn {
+  .header-scrolled .hamburger {
     color: var(--color-text);
+  }
+
+  /* Backdrop Overlay */
+  .menu-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-out, visibility 0.3s;
+    z-index: 40;
+  }
+  .menu-backdrop.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Slide-in Menu Panel */
+  .mobile-menu-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    height: 100dvh;
+    background: var(--color-primary);
+    transform: translateX(100%);
+    transition: transform 0.3s ease-out;
+    z-index: 50;
+    padding: 5rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .mobile-menu-panel.open {
+    transform: translateX(0);
+  }
+
+  /* Mobile Navigation Links */
+  .mobile-nav-link {
+    font-size: 1.125rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Animated Hamburger */
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 60;
+    position: relative;
+  }
+  .hamburger-line {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: currentColor;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    transform-origin: center;
+  }
+  .hamburger.open .hamburger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .hamburger.open .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.open .hamburger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .menu-backdrop,
+    .mobile-menu-panel,
+    .hamburger-line {
+      transition: none;
+    }
   }
 </style>
