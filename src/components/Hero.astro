@@ -20,10 +20,13 @@ const {
   <!-- Video Background - No Overlay -->
   <div class="absolute inset-0">
     <video
+      id="hero-video"
       autoplay
       muted
       loop
       playsinline
+      webkit-playsinline
+      preload="auto"
       poster="/images/barcelona-overview.avif"
       class="w-full h-full object-cover"
     >
@@ -169,3 +172,37 @@ const {
     }
   }
 </style>
+
+<script>
+  // Force video autoplay on mobile (iOS Safari workaround)
+  const video = document.getElementById('hero-video') as HTMLVideoElement;
+
+  if (video) {
+    // Ensure video is muted (required for autoplay)
+    video.muted = true;
+
+    // Try to play immediately
+    const playPromise = video.play();
+
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // Autoplay failed, try on first user interaction
+        const playOnInteraction = () => {
+          video.play();
+          document.removeEventListener('touchstart', playOnInteraction);
+          document.removeEventListener('click', playOnInteraction);
+          document.removeEventListener('scroll', playOnInteraction);
+        };
+
+        document.addEventListener('touchstart', playOnInteraction, { once: true });
+        document.addEventListener('click', playOnInteraction, { once: true });
+        document.addEventListener('scroll', playOnInteraction, { once: true });
+      });
+    }
+
+    // Also try to play when video data is loaded
+    video.addEventListener('loadeddata', () => {
+      video.play().catch(() => {});
+    });
+  }
+</script>
