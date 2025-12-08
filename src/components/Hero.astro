@@ -26,8 +26,8 @@ const {
       loop
       playsinline
       webkit-playsinline
-      preload="auto"
-      poster="/images/barcelona-overview.avif"
+      preload="metadata"
+      poster="/images/hero-poster.jpg"
       class="w-full h-full object-cover"
     >
       <source src="/videos/barcelona-hero-compressed.mp4" type="video/mp4" />
@@ -178,31 +178,41 @@ const {
   const video = document.getElementById('hero-video') as HTMLVideoElement;
 
   if (video) {
-    // Ensure video is muted (required for autoplay)
+    // Ensure video is muted (required for autoplay on mobile)
     video.muted = true;
+    video.defaultMuted = true;
+    video.setAttribute('muted', '');
 
-    // Try to play immediately
-    const playPromise = video.play();
+    // Function to attempt play
+    const attemptPlay = () => {
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Silent catch - will retry on interaction
+        });
+      }
+    };
 
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        // Autoplay failed, try on first user interaction
-        const playOnInteraction = () => {
-          video.play();
-          document.removeEventListener('touchstart', playOnInteraction);
-          document.removeEventListener('click', playOnInteraction);
-          document.removeEventListener('scroll', playOnInteraction);
-        };
+    // Try to play on various events
+    video.addEventListener('loadedmetadata', attemptPlay);
+    video.addEventListener('canplay', attemptPlay);
+    video.addEventListener('canplaythrough', attemptPlay);
 
-        document.addEventListener('touchstart', playOnInteraction, { once: true });
-        document.addEventListener('click', playOnInteraction, { once: true });
-        document.addEventListener('scroll', playOnInteraction, { once: true });
-      });
-    }
-
-    // Also try to play when video data is loaded
-    video.addEventListener('loadeddata', () => {
+    // Fallback: play on first user interaction
+    const playOnInteraction = () => {
       video.play().catch(() => {});
-    });
+      document.removeEventListener('touchstart', playOnInteraction);
+      document.removeEventListener('touchend', playOnInteraction);
+      document.removeEventListener('click', playOnInteraction);
+      document.removeEventListener('scroll', playOnInteraction);
+    };
+
+    document.addEventListener('touchstart', playOnInteraction, { passive: true });
+    document.addEventListener('touchend', playOnInteraction, { passive: true });
+    document.addEventListener('click', playOnInteraction, { passive: true });
+    document.addEventListener('scroll', playOnInteraction, { passive: true });
+
+    // Try immediately
+    attemptPlay();
   }
 </script>
