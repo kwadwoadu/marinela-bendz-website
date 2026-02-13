@@ -2,7 +2,7 @@ backend:
   name: github
   repo: kwadwoadu/marinela-bendz-website
   branch: main
-  base_url: https://sveltia-cms-auth-c1t.pages.dev
+  base_url: https://marinela-bendz-website.pages.dev
 
 # Local development
 local_backend: true
