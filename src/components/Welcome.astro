@@ -4,28 +4,28 @@
  * Three-column layout with animated floating images on sides
  * Images animate in on scroll using Intersection Observer
  */
+import data from '../content/welcome.json';
+
+const leftImages = data.galleryImages.slice(0, 2);
+const rightImages = data.galleryImages.slice(2, 5);
 ---
 
 <section id="welcome" class="welcome-section bg-background">
   <!-- Left Floating Images (Desktop only) -->
   <div class="floating-images floating-images-left">
-    <div class="floating-image floating-image-1">
-      <img
-        src="/images/about1.avif"
-        alt="Barcelona luxury property"
-        class="w-full h-auto"
-        loading="lazy"
-      />
-    </div>
-    <div class="spacer-large"></div>
-    <div class="floating-image floating-image-2">
-      <img
-        src="/images/about2.avif"
-        alt="Mediterranean lifestyle"
-        class="w-full h-auto"
-        loading="lazy"
-      />
-    </div>
+    {leftImages.map((img, i) => (
+      <Fragment>
+        {i > 0 && <div class="spacer-large"></div>}
+        <div class={`floating-image floating-image-${i + 1}`}>
+          <img
+            src={img.src}
+            alt={img.alt}
+            class="w-full h-auto"
+            loading="lazy"
+          />
+        </div>
+      </Fragment>
+    ))}
   </div>
 
   <!-- Center Content -->
@@ -41,42 +41,34 @@
 
     <!-- Welcome Text -->
     <p class="welcome-label" style="font-family: var(--font-sans);">
-      Welcome to Marinela Bendz, Property Hunter
+      {data.label}
     </p>
 
     <!-- Headline -->
-    <h2 class="welcome-headline">
-      Where Luxury Meets<br />the Ocean Breeze
-    </h2>
+    <h2 class="welcome-headline" set:html={data.headline} />
 
     <!-- Tagline -->
     <p class="welcome-tagline">
-      -Your trusted advisor for homes and assets.
+      {data.tagline}
     </p>
 
     <!-- Body Paragraphs -->
     <div class="welcome-body">
-      <p>
-        As a property hunter in Barcelona, I specialise in finding the right property for my clients - whether for investment or as a home. My job is to research, shortlist, visit, and evaluate each property, so you can save time and energy to focus on other priorities.
-      </p>
-      <p>
-        Driven by my Scandinavian roots and work ethic, I take great pride in delivering a service built on excellence. My clients can expect high standards with attention to detail and accountability in every step of the collaboration.
-      </p>
-      <p>
-        Unlike traditional real estate agents, I work exclusively for the buyers: No conflict of interest, no seller-side commission. My service is contracted at a fixed rate regardless of the property price; ensuring my advice and recommendations are unbiased and always aligned with your best interests.
-      </p>
+      {data.bodyParagraphs.map((paragraph) => (
+        <p>{paragraph}</p>
+      ))}
     </div>
 
     <!-- Warmest regards -->
     <p class="welcome-regards">
-      Warmest regards,
+      {data.signOff}
     </p>
 
     <!-- Portrait -->
     <div class="welcome-portrait">
       <img
-        src="/images/marinela-portrait.png"
-        alt="Marinela Bendz"
+        src={data.portraitImage}
+        alt={data.name}
         class="w-40 h-40 object-cover rounded-sm mx-auto"
       />
     </div>
@@ -84,45 +76,32 @@
     <!-- Signature -->
     <div class="welcome-signature">
       <img
-        src="/images/signature.avif"
-        alt="Marinela Bendz signature"
+        src={data.signatureImage}
+        alt={`${data.name} signature`}
         class="signature-img"
       />
     </div>
 
     <!-- Name -->
-    <p class="welcome-name">Marinela Bendz</p>
-    <p class="welcome-title" style="font-family: var(--font-sans);">Property Hunter</p>
+    <p class="welcome-name">{data.name}</p>
+    <p class="welcome-title" style="font-family: var(--font-sans);">{data.title}</p>
   </div>
 
   <!-- Right Floating Images (Desktop only) -->
   <div class="floating-images floating-images-right">
-    <div class="floating-image floating-image-3">
-      <img
-        src="/images/about3.avif"
-        alt="Barcelona architecture"
-        class="w-full h-auto"
-        loading="lazy"
-      />
-    </div>
-    <div class="spacer-medium"></div>
-    <div class="floating-image floating-image-4">
-      <img
-        src="/images/about4.avif"
-        alt="Luxury interior"
-        class="w-full h-auto"
-        loading="lazy"
-      />
-    </div>
-    <div class="spacer-large"></div>
-    <div class="floating-image floating-image-5">
-      <img
-        src="/images/about5.avif"
-        alt="Barcelona city view"
-        class="w-full h-auto"
-        loading="lazy"
-      />
-    </div>
+    {rightImages.map((img, i) => (
+      <Fragment>
+        {i > 0 && <div class={i === 1 ? "spacer-large" : "spacer-medium"}></div>}
+        <div class={`floating-image floating-image-${i + 3}`}>
+          <img
+            src={img.src}
+            alt={img.alt}
+            class="w-full h-auto"
+            loading="lazy"
+          />
+        </div>
+      </Fragment>
+    ))}
   </div>
 </section>
 
@@ -167,7 +146,6 @@
     overflow: hidden;
   }
 
-  /* Desktop: Three columns */
   @media (min-width: 1280px) {
     .welcome-section {
       grid-template-columns: 1fr minmax(auto, 600px) 1fr;
@@ -177,7 +155,6 @@
     }
   }
 
-  /* Floating Images Containers */
   .floating-images {
     display: none;
     flex-direction: column;
@@ -201,7 +178,6 @@
     padding-left: 2rem;
   }
 
-  /* Spacers for spreading images throughout section */
   .spacer-medium {
     height: 200px;
   }
@@ -210,7 +186,6 @@
     height: 400px;
   }
 
-  /* Floating Image Items - Animated */
   .floating-image {
     opacity: 0;
     transform: translateY(60px);
@@ -223,7 +198,6 @@
     transform: translateY(0);
   }
 
-  /* All images displayed as tall/portrait - cropped to fit */
   .floating-image-1 {
     width: 280px;
     height: 380px;
@@ -261,7 +235,6 @@
     display: block;
   }
 
-  /* Center Content */
   .welcome-content {
     text-align: center;
     max-width: 600px;
@@ -360,7 +333,6 @@
     text-transform: uppercase;
   }
 
-  /* Reduced motion support */
   @media (prefers-reduced-motion: reduce) {
     .floating-image {
       opacity: 1;

@@ -16,18 +16,19 @@ display_url: https://marinela-bendz-website.pages.dev
 collections:
   # Site Settings
   - name: "settings"
-    label: "Site Settings"
+    label: "Settings"
     files:
       - label: "General Settings"
         name: "general"
         file: "src/content/settings.json"
         fields:
-          - { label: "Site Title", name: "siteTitle", widget: "string", default: "Marinela Bendz" }
+          - { label: "Site Title", name: "siteTitle", widget: "string" }
           - { label: "Site Description", name: "siteDescription", widget: "text" }
           - { label: "Contact Email", name: "contactEmail", widget: "string" }
           - { label: "Tally Form ID", name: "tallyFormId", widget: "string" }
+          - { label: "OG Image", name: "ogImage", widget: "image", required: false }
 
-  # Homepage Content
+  # Homepage Sections
   - name: "homepage"
     label: "Homepage"
     files:
@@ -35,30 +36,73 @@ collections:
         name: "hero"
         file: "src/content/hero.json"
         fields:
-          - { label: "Main Headline", name: "headline", widget: "string", default: "Where Luxury Meets the Ocean Breeze" }
-          - { label: "Subheadline", name: "subheadline", widget: "text", default: "Your trusted advisor for homes and assets in Barcelona" }
-          - { label: "Hero Image", name: "heroImage", widget: "image", required: false }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Subtitle", name: "subtitle", widget: "string" }
+          - { label: "CTA Button 1 Label", name: "ctaButton1Label", widget: "string" }
+          - { label: "CTA Button 2 Label", name: "ctaButton2Label", widget: "string" }
+          - { label: "Video Poster Image", name: "videoPoster", widget: "image" }
 
-      - label: "Introduction Section"
-        name: "introduction"
-        file: "src/content/introduction.json"
+      - label: "Welcome Section"
+        name: "welcome"
+        file: "src/content/welcome.json"
         fields:
-          - { label: "Section Headline", name: "headline", widget: "string" }
-          - { label: "Body Text", name: "body", widget: "text" }
-
-      - label: "About Section"
-        name: "about"
-        file: "src/content/about.json"
-        fields:
-          - { label: "Headline", name: "headline", widget: "string" }
+          - { label: "Label", name: "label", widget: "string" }
+          - { label: "Headline (HTML allowed)", name: "headline", widget: "string" }
+          - { label: "Tagline", name: "tagline", widget: "string" }
           - label: "Body Paragraphs"
             name: "bodyParagraphs"
             widget: "list"
             field: { label: "Paragraph", name: "paragraph", widget: "text" }
-          - { label: "Portrait Photo", name: "portrait", widget: "image" }
-          - { label: "Signature Image", name: "signature", widget: "image", required: false }
+          - { label: "Sign Off", name: "signOff", widget: "string" }
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Portrait Image", name: "portraitImage", widget: "image" }
+          - { label: "Signature Image", name: "signatureImage", widget: "image" }
+          - label: "Gallery Images"
+            name: "galleryImages"
+            widget: "list"
+            fields:
+              - { label: "Image", name: "src", widget: "image" }
+              - { label: "Alt Text", name: "alt", widget: "string" }
 
-  # Services
+      - label: "Services Section Header"
+        name: "services-section"
+        file: "src/content/services-section.json"
+        fields:
+          - { label: "Section Label", name: "sectionLabel", widget: "string" }
+          - { label: "Section Headline", name: "sectionHeadline", widget: "string" }
+          - { label: "Bottom CTA Text", name: "bottomCtaText", widget: "string" }
+          - { label: "Bottom CTA Label", name: "bottomCtaLabel", widget: "string" }
+
+      - label: "FAQ Section Header"
+        name: "faq-section"
+        file: "src/content/faq-section.json"
+        fields:
+          - { label: "Section Label", name: "sectionLabel", widget: "string" }
+          - { label: "Section Headline", name: "sectionHeadline", widget: "string" }
+          - { label: "Bottom CTA Text", name: "bottomCtaText", widget: "string" }
+          - { label: "Bottom CTA Label", name: "bottomCtaLabel", widget: "string" }
+
+      - label: "Contact Section"
+        name: "contact"
+        file: "src/content/contact.json"
+        fields:
+          - { label: "Section Label", name: "sectionLabel", widget: "string" }
+          - { label: "Headline", name: "headline", widget: "string" }
+          - { label: "Subheadline", name: "subheadline", widget: "text" }
+          - { label: "Background Image", name: "backgroundImage", widget: "image" }
+
+      - label: "Footer"
+        name: "footer"
+        file: "src/content/footer.json"
+        fields:
+          - { label: "Brand Description", name: "brandDescription", widget: "text" }
+          - { label: "Tagline", name: "tagline", widget: "string" }
+          - { label: "Location", name: "location", widget: "string" }
+          - { label: "LinkedIn URL", name: "linkedinUrl", widget: "string" }
+          - { label: "Instagram URL", name: "instagramUrl", widget: "string" }
+
+  # Services (folder collection)
   - name: "services"
     label: "Services"
     folder: "src/content/services"
@@ -68,16 +112,17 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Subtitle", name: "subtitle", widget: "string" }
       - { label: "Description", name: "description", widget: "text" }
-      - { label: "Price", name: "price", widget: "string", default: "€11,000" }
-      - { label: "Price Note", name: "priceNote", widget: "string", default: "Fixed fee regardless of property price" }
+      - { label: "Price", name: "price", widget: "string" }
+      - { label: "Price Note", name: "priceNote", widget: "string" }
       - { label: "Image", name: "image", widget: "image" }
+      - { label: "CTA Label", name: "ctaLabel", widget: "string", default: "Get Started" }
       - label: "Features"
         name: "features"
         widget: "list"
         field: { label: "Feature", name: "feature", widget: "string" }
       - { label: "Order", name: "order", widget: "number", default: 0 }
 
-  # FAQ
+  # FAQ (folder collection)
   - name: "faq"
     label: "FAQ"
     folder: "src/content/faq"

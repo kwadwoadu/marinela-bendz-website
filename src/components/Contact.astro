@@ -1,14 +1,13 @@
 ---
+import contactData from '../content/contact.json';
+import settings from '../content/settings.json';
+
 interface Props {
-  headline?: string;
-  subheadline?: string;
   tallyFormId?: string;
 }
 
 const {
-  headline = "Get In Touch",
-  subheadline = "Ready to find your dream property in Barcelona? Let's discuss your needs.",
-  tallyFormId = "YOUR_TALLY_FORM_ID"
+  tallyFormId = settings.tallyFormId
 } = Astro.props;
 ---
 
@@ -16,7 +15,7 @@ const {
   <!-- Background -->
   <div class="absolute inset-0">
     <img
-      src="/images/barcelona-vibe.avif"
+      src={contactData.backgroundImage}
       alt="Barcelona cityscape"
       class="w-full h-full object-cover"
     />
@@ -30,14 +29,14 @@ const {
       <div class="text-center mb-12 scroll-animate">
         <div class="flex items-center justify-center gap-4 mb-6">
           <div class="w-16 h-px bg-secondary/50"></div>
-          <span class="text-secondary text-sm tracking-widest uppercase">Contact</span>
+          <span class="text-secondary text-sm tracking-widest uppercase">{contactData.sectionLabel}</span>
           <div class="w-16 h-px bg-secondary/50"></div>
         </div>
         <h2 class="text-3xl md:text-4xl text-white mb-4">
-          {headline}
+          {contactData.headline}
         </h2>
         <p class="text-white/70 text-lg max-w-2xl mx-auto">
-          {subheadline}
+          {contactData.subheadline}
         </p>
       </div>
 
@@ -63,8 +62,8 @@ const {
             <p class="text-text-muted mb-4">Please enable JavaScript to use the contact form.</p>
             <p class="text-text-muted">
               Or email directly:
-              <a href="mailto:contact@marinelabendz.com" class="text-secondary hover:underline">
-                contact@marinelabendz.com
+              <a href={`mailto:${settings.contactEmail}`} class="text-secondary hover:underline">
+                {settings.contactEmail}
               </a>
             </p>
           </div>
@@ -75,8 +74,8 @@ const {
       <div class="text-center mt-8">
         <p class="text-white/60 text-sm">
           Prefer email?
-          <a href="mailto:contact@marinelabendz.com" class="text-secondary hover:underline">
-            contact@marinelabendz.com
+          <a href={`mailto:${settings.contactEmail}`} class="text-secondary hover:underline">
+            {settings.contactEmail}
           </a>
         </p>
       </div>

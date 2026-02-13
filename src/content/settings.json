@@ -1,6 +1,7 @@
 {
-  "siteTitle": "Marinela Bendz",
-  "siteDescription": "Luxury property hunter specializing in Barcelona real estate. Exclusive buyer representation with fixed-fee transparency.",
+  "siteTitle": "Marinela Bendz | Luxury Property Hunter Barcelona",
+  "siteDescription": "Your trusted advisor for luxury homes and investment properties in Barcelona. Exclusive buyer representation, fixed fee of \u20ac11,000, and complete market access.",
   "contactEmail": "contact@marinelabendz.com",
-  "tallyFormId": ""
+  "tallyFormId": "YOUR_TALLY_FORM_ID",
+  "ogImage": "/images/og-image.jpg"
 }

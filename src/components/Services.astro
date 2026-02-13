@@ -1,41 +1,10 @@
 ---
-const services = [
-  {
-    id: "personal",
-    title: "Personal Residencies",
-    subtitle: "Second residence or full relocation",
-    description: "Based on your needs and budget, I search the market for properties on your behalf, curating a list of properties for your consideration. All you have to do is view the properties you like, and when we find the perfect match, I negotiate the deal and follow through with the buying process to completion.",
-    features: [
-      "Personalized property search",
-      "Neighbourhood guidance",
-      "School recommendations",
-      "Curated property shortlists",
-      "Property viewings coordination",
-      "Due diligence & legal checks",
-      "Offer submission & negotiation"
-    ],
-    price: "€11,000",
-    priceNote: "Fixed fee regardless of property price",
-    image: "/images/PersonalResidencies.png"
-  },
-  {
-    id: "investment",
-    title: "Investment Properties",
-    subtitle: "Maximize your returns in Barcelona",
-    description: "Whether you're looking to fix & flip or buy & hold, I identify opportunities that align with your investment goals. My market analysis ensures you're making informed decisions with maximum ROI potential.",
-    features: [
-      "Market analysis & opportunity identification",
-      "Fix & Flip or Buy & Hold strategies",
-      "ROI calculations & projections",
-      "Property valuation & due diligence",
-      "Negotiation for best terms",
-      "Investment portfolio guidance"
-    ],
-    price: "€11,000",
-    priceNote: "Fixed fee regardless of property price",
-    image: "/images/InvestmentProperties.png"
-  }
-];
+import sectionData from '../content/services-section.json';
+
+const serviceModules = import.meta.glob('../content/services/*.json', { eager: true });
+const services = Object.values(serviceModules)
+  .map((mod: any) => mod.default || mod)
+  .sort((a, b) => a.order - b.order);
 ---
 
 <section id="services" class="section-padding bg-background-alt">
@@ -44,10 +13,10 @@ const services = [
     <div class="text-center mb-16 scroll-animate">
       <div class="flex items-center justify-center gap-4 mb-6">
         <div class="w-16 h-px bg-secondary/30"></div>
-        <span class="text-secondary text-sm tracking-widest uppercase">Services</span>
+        <span class="text-secondary text-sm tracking-widest uppercase">{sectionData.sectionLabel}</span>
         <div class="w-16 h-px bg-secondary/30"></div>
       </div>
-      <h2 class="text-3xl md:text-4xl text-text">How I Can Help You</h2>
+      <h2 class="text-3xl md:text-4xl text-text">{sectionData.sectionHeadline}</h2>
     </div>
 
     <!-- Services Grid -->
@@ -93,7 +62,7 @@ const services = [
                 <div class="text-xs text-text-muted">{service.priceNote}</div>
               </div>
               <a href="#contact" class="btn-primary">
-                Get Started
+                {service.ctaLabel}
               </a>
             </div>
           </div>
@@ -104,10 +73,10 @@ const services = [
     <!-- Bottom CTA -->
     <div class="text-center mt-16 scroll-animate">
       <p class="text-text-muted mb-6">
-        Not sure which service is right for you?
+        {sectionData.bottomCtaText}
       </p>
       <a href="#contact" class="btn-outline inline-block">
-        Let's Discuss Your Needs
+        {sectionData.bottomCtaLabel}
       </a>
     </div>
   </div>

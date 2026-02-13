@@ -7,11 +7,13 @@ import Services from '../components/Services.astro';
 import FAQ from '../components/FAQ.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
+import settings from '../content/settings.json';
 ---
 
 <BaseLayout
-  title="Marinela Bendz | Luxury Property Hunter Barcelona"
-  description="Your trusted advisor for luxury homes and investment properties in Barcelona. Exclusive buyer representation, fixed fee of €11,000, and complete market access."
+  title={settings.siteTitle}
+  description={settings.siteDescription}
+  image={settings.ogImage}
 >
   <Header />
   <main>
@@ -19,7 +21,7 @@ import Footer from '../components/Footer.astro';
     <Welcome />
     <Services />
     <FAQ />
-    <Contact tallyFormId="YOUR_TALLY_FORM_ID" />
+    <Contact tallyFormId={settings.tallyFormId} />
   </main>
   <Footer />
 </BaseLayout>

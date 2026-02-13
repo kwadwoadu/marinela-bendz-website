@@ -4,6 +4,7 @@
  * Full viewport video hero with elegant script typography
  * No overlay - clean video background
  */
+import heroData from '../content/hero.json';
 
 interface Props {
   title?: string;
@@ -11,8 +12,8 @@ interface Props {
 }
 
 const {
-  title = "Marinela Bendz",
-  subtitle = "Luxury Property Hunter · Barcelona"
+  title = heroData.title,
+  subtitle = heroData.subtitle
 } = Astro.props;
 ---
 
@@ -27,7 +28,7 @@ const {
       playsinline
       webkit-playsinline
       preload="metadata"
-      poster="/images/hero-poster.jpg"
+      poster={heroData.videoPoster}
       class="w-full h-full object-cover"
     >
       <source src="/videos/barcelona-hero-compressed.mp4" type="video/mp4" />
@@ -50,10 +51,10 @@ const {
   <div class="relative z-10 hero-buttons-container">
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up stagger-2">
       <a href="#services" class="btn-primary w-full sm:w-auto text-center">
-        Personal Residencies
+        {heroData.ctaButton1Label}
       </a>
       <a href="#services" class="btn-glass w-full sm:w-auto text-center">
-        Investment Properties
+        {heroData.ctaButton2Label}
       </a>
     </div>
   </div>
@@ -67,7 +68,6 @@ const {
 </section>
 
 <style>
-  /* Hero script title - elegant calligraphy font */
   .hero-script-title {
     font-family: 'Pinyon Script', cursive;
     font-size: 4rem;
@@ -89,12 +89,10 @@ const {
     }
   }
 
-  /* Subtitle with text shadow for readability */
   .hero-subtitle {
     text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
   }
 
-  /* Fade in up animation */
   .animate-fade-in-up {
     animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     opacity: 0;
@@ -111,7 +109,6 @@ const {
     }
   }
 
-  /* Stagger delays */
   .stagger-1 {
     animation-delay: 0.15s;
   }
@@ -120,7 +117,6 @@ const {
     animation-delay: 0.3s;
   }
 
-  /* Solid white button - Investment Properties */
   .btn-glass {
     background: rgba(255, 255, 255, 0.95);
     border: 1px solid white;
@@ -139,7 +135,6 @@ const {
     box-shadow: 0 8px 20px rgba(255, 255, 255, 0.25);
   }
 
-  /* Scroll indicator bounce */
   .scroll-indicator {
     animation: gentleBounce 2s ease-in-out infinite;
   }
@@ -149,7 +144,6 @@ const {
     50% { transform: translateY(10px) translateX(-50%); }
   }
 
-  /* Hero buttons container - positioned at bottom */
   .hero-buttons-container {
     padding-bottom: 100px;
     padding-left: 1.5rem;
@@ -162,7 +156,6 @@ const {
     }
   }
 
-  /* Reduced motion support */
   @media (prefers-reduced-motion: reduce) {
     .animate-fade-in-up,
     .scroll-indicator {
@@ -174,31 +167,24 @@ const {
 </style>
 
 <script>
-  // Force video autoplay on mobile (iOS Safari workaround)
   const video = document.getElementById('hero-video') as HTMLVideoElement;
 
   if (video) {
-    // Ensure video is muted (required for autoplay on mobile)
     video.muted = true;
     video.defaultMuted = true;
     video.setAttribute('muted', '');
 
-    // Function to attempt play
     const attemptPlay = () => {
       const playPromise = video.play();
       if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          // Silent catch - will retry on interaction
-        });
+        playPromise.catch(() => {});
       }
     };
 
-    // Try to play on various events
     video.addEventListener('loadedmetadata', attemptPlay);
     video.addEventListener('canplay', attemptPlay);
     video.addEventListener('canplaythrough', attemptPlay);
 
-    // Fallback: play on first user interaction
     const playOnInteraction = () => {
       video.play().catch(() => {});
       document.removeEventListener('touchstart', playOnInteraction);
@@ -212,7 +198,6 @@ const {
     document.addEventListener('click', playOnInteraction, { passive: true });
     document.addEventListener('scroll', playOnInteraction, { passive: true });
 
-    // Try immediately
     attemptPlay();
   }
 </script>

@@ -1,5 +1,7 @@
 {
-  "headline": "Where Luxury Meets the Ocean Breeze",
-  "subheadline": "Your trusted advisor for homes and assets in Barcelona",
-  "heroImage": "/images/barcelona-overview.avif"
+  "title": "Marinela Bendz",
+  "subtitle": "Luxury Property Hunter \u00b7 Barcelona",
+  "ctaButton1Label": "Personal Residencies",
+  "ctaButton2Label": "Investment Properties",
+  "videoPoster": "/images/hero-poster.jpg"
 }
