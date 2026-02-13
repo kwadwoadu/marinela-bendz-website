@@ -2,6 +2,8 @@ backend:
   name: github
   repo: kwadwoadu/marinela-bendz-website
   branch: main
+  auth_type: pkce
+  app_id: Ov23libSv7kwvv4LZWWN
 
 # Local development
 local_backend: true
@@ -9,8 +11,8 @@ local_backend: true
 media_folder: public/images
 public_folder: /images
 
-site_url: https://marinelabendz.com
-display_url: https://marinelabendz.com
+site_url: https://marinela-bendz-website.pages.dev
+display_url: https://marinela-bendz-website.pages.dev
 
 collections:
   # Site Settings
