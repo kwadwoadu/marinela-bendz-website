@@ -106,6 +106,8 @@ collections:
   - name: "services"
     label: "Services"
     folder: "src/content/services"
+    extension: "json"
+    format: "json"
     create: true
     slug: "{{slug}}"
     fields:
@@ -126,6 +128,8 @@ collections:
   - name: "faq"
     label: "FAQ"
     folder: "src/content/faq"
+    extension: "json"
+    format: "json"
     create: true
     slug: "{{slug}}"
     fields:
