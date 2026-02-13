@@ -2,8 +2,7 @@ backend:
   name: github
   repo: kwadwoadu/marinela-bendz-website
   branch: main
-  auth_type: pkce
-  app_id: Ov23libSv7kwvv4LZWWN
+  base_url: https://sveltia-cms-auth-c1t.pages.dev
 
 # Local development
 local_backend: true
