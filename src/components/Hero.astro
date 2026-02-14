@@ -5,16 +5,6 @@
  * No overlay - clean video background
  */
 import heroData from '../content/hero.json';
-
-interface Props {
-  title?: string;
-  subtitle?: string;
-}
-
-const {
-  title = heroData.title,
-  subtitle = heroData.subtitle
-} = Astro.props;
 ---
 
 <section class="relative h-screen flex flex-col overflow-hidden">
@@ -31,7 +21,7 @@ const {
       poster={heroData.videoPoster}
       class="w-full h-full object-cover"
     >
-      <source src="/videos/barcelona-hero-compressed.mp4" type="video/mp4" />
+      <source src={heroData.videoUrl} type="video/mp4" />
     </video>
   </div>
 
@@ -39,10 +29,10 @@ const {
   <div class="relative z-10 flex-1 flex items-center justify-center px-6">
     <div class="text-center">
       <h1 class="hero-script-title text-white mb-6 animate-fade-in-up">
-        {title}
+        {heroData.title}
       </h1>
       <p class="text-xl md:text-2xl text-white/90 animate-fade-in-up stagger-1 tracking-wide font-light hero-subtitle" style="font-family: var(--font-sans);">
-        {subtitle}
+        {heroData.subtitle}
       </p>
     </div>
   </div>
