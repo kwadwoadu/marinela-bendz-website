@@ -4,12 +4,7 @@ import settings from '../content/settings.json';
 
 const currentYear = new Date().getFullYear();
 
-const navLinks = [
-  { label: "Services", href: "#services" },
-  { label: "About", href: "#about" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
-];
+const navLinks = footerData.navLinks;
 ---
 
 <footer class="bg-cream text-dark">
@@ -19,7 +14,7 @@ const navLinks = [
       <div class="text-center md:text-left">
         <div class="mb-6 flex justify-center md:justify-start">
           <img
-            src="/images/logo.svg"
+            src={settings.logoUrl}
             alt="Marinela Bendz"
             class="h-14 w-auto"
           />

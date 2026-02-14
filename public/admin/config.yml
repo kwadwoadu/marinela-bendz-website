@@ -27,6 +27,7 @@ collections:
           - { label: "Contact Email", name: "contactEmail", widget: "string" }
           - { label: "Tally Form ID", name: "tallyFormId", widget: "string" }
           - { label: "OG Image", name: "ogImage", widget: "image", required: false }
+          - { label: "Logo", name: "logoUrl", widget: "image", required: false }
 
   # Homepage Sections
   - name: "homepage"
