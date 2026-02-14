@@ -3,5 +3,6 @@
   "subtitle": "Luxury Property Hunter \u00b7 Barcelona",
   "ctaButton1Label": "Personal Residencies",
   "ctaButton2Label": "Investment Properties",
-  "videoPoster": "/images/hero-poster.jpg"
+  "videoPoster": "/images/hero-poster.jpg",
+  "videoUrl": "/videos/barcelona-hero-compressed.mp4"
 }
