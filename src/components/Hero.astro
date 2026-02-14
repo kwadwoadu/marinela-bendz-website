@@ -25,15 +25,14 @@ import heroData from '../content/hero.json';
     </video>
   </div>
 
-  <!-- Title and Subtitle - Centered Vertically -->
+  <!-- Hero Logo - Centered Vertically -->
   <div class="relative z-10 flex-1 flex items-center justify-center px-6">
-    <div class="text-center">
-      <h1 class="hero-script-title text-white mb-6 animate-fade-in-up">
-        {heroData.title}
-      </h1>
-      <p class="text-xl md:text-2xl text-white/90 animate-fade-in-up stagger-1 tracking-wide font-light hero-subtitle" style="font-family: var(--font-sans);">
-        {heroData.subtitle}
-      </p>
+    <div class="text-center animate-fade-in-up">
+      <img
+        src="/images/MBPH_LuxGold.png"
+        alt={heroData.title + ' - ' + heroData.subtitle}
+        class="hero-logo mx-auto"
+      />
     </div>
   </div>
 
@@ -76,6 +75,24 @@ import heroData from '../content/hero.json';
   @media (min-width: 1024px) {
     .hero-script-title {
       font-size: 8rem;
+    }
+  }
+
+  .hero-logo {
+    width: 280px;
+    height: auto;
+    filter: drop-shadow(2px 2px 12px rgba(0, 0, 0, 0.3));
+  }
+
+  @media (min-width: 768px) {
+    .hero-logo {
+      width: 380px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-logo {
+      width: 460px;
     }
   }
 
