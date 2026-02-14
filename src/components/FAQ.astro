@@ -52,8 +52,9 @@ const faqs = Object.values(faqModules)
 <script>
   document.querySelectorAll('.faq-trigger').forEach(button => {
     button.addEventListener('click', () => {
-      const item = button.parentElement;
-      const content = item?.querySelector('.faq-content');
+      const item = button.closest('.faq-item');
+      if (!item) return;
+      const content = item.querySelector('.faq-content');
       const icon = button.querySelector('.faq-icon');
       const isExpanded = button.getAttribute('aria-expanded') === 'true';
 

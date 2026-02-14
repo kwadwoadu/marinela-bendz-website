@@ -3,5 +3,11 @@
   "tagline": "Where Luxury Meets the Ocean Breeze",
   "location": "Barcelona, Spain",
   "linkedinUrl": "#",
-  "instagramUrl": "#"
+  "instagramUrl": "#",
+  "navLinks": [
+    { "label": "Services", "href": "#services" },
+    { "label": "About", "href": "#about" },
+    { "label": "FAQ", "href": "#faq" },
+    { "label": "Contact", "href": "#contact" }
+  ]
 }
